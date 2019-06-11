@@ -27,12 +27,13 @@ export default class App extends Component<Props> {
       placeName: val
     });
   };
-  
+
   render() {
     return (
       <View style={styles.container}>
         <TextInput 
         style={{width: 300, borderColor: "black", borderWidth: 1}}
+        placeholder="Place"
         value={this.state.placeName} 
         onChangeText={this.placeNameChangedHandler
         }/>
