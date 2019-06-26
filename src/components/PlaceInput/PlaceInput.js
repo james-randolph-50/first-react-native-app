@@ -12,6 +12,14 @@ class PlaceInput extends Component {
         });
       };
 
+      placeSubmitHandler = () => {
+        if (this.state.placeName.trim() === "") {
+          return;
+        }
+    
+        this.props.onPlaceAdded(this.state.placeName);
+      };
+
     render() {
         return (
     <View style={styles.inputContainer}>
