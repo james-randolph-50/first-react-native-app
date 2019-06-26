@@ -9,6 +9,8 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, View, TextInput, Button} from 'react-native';
 
+import ListItem from './src/components/ListItem/ListItem';
+
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:
@@ -44,26 +46,11 @@ export default class App extends Component<Props> {
 
   render() {
     const placesOutput = this.state.places.map((place, i) => (
-      <Text key={i}>{place}</Text>
+      <ListItem key={i} placeName={place} />
     ));
     return (
-      <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <TextInput 
-          style={{width: 300}}
-          placeholder="Place"
-          value={this.state.placeName} 
-          onChangeText={this.placeNameChangedHandler}
-          style={styles.placeInput}
-          />
-          <Button title="Add" 
-          style={styles.placeButton} 
-          onPress={this.placeSubmitHandler}/>
-        </View>
-        <View>
-
-        </View>
-          {placesOutput}
+      <View style={styles.container}>          
+        <View style={styles.listContainer}>{placesOutput}</View>
       </View>
     );
   }
@@ -77,18 +64,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  inputContainer: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center"
-  },
-  placeInput: {
-    width: "70%"
-
-  },
-  placeButton: {
-    width: "30%"
-
+  listContainer: {
+    width: "100%"
   }
 });
