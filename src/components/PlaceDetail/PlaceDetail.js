@@ -14,12 +14,15 @@ const placeDetail = props => {
     }
 
     return (
-        <Modal visible={props.selectedPlace !== null} animationType="slide">
+        <Modal 
+            onRequestClose={props.onModalClosed}
+            visible={props.selectedPlace !== null} 
+            animationType="slide">
             <View style={styles.modalContainer}>
                 {modalContent}
                 <View>
-                    <Button title="Delete" color="red"/>
-                    <Button title="Close"/>
+                    <Button title="Delete" color="red" onPress={props.onItemDeleted} />
+                    <Button title="Close" onPress={props.onModalClosed} />
                 </View>
             </View>
     </Modal>
