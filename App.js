@@ -8,64 +8,33 @@ import PlaceDetail from './src/components/PlaceDetail/PlaceDetail';
 import { addPlace, deletePlace, selectPlace, deselectPlace } from './src/store/actions/index';
 
 class App extends Component {
-  state = {
-    places: [],
-    selectedPlace: null
+  placeAddedHandler = (placeName) => {
+    this.props.onAddPlace(placeName);
   };
 
   placeDeletedHandler = () => {
-    this.setState(prevState => {
-          return {
-            places: prevState.places.filter(place => {
-              return place.key !== prevState.selectedPlace.key;
-            }),
-            selectedPlace: null
-          };
-        });
+    this.props.onDeletePlace();
   };
 
   modalClosedHandler = () => {
-    this.setState({
-      selectedPlace: null
-    });
+    this.props.onDeselectPlace();
   }
 
-  placeAddedHandler = (placeName) => {
-    this.setState(prevState => {
-      return {
-        places: prevState.places.concat({
-          key: Math.random(),
-          name: placeName,
-          image: {
-            uri: ""
-          }
-        })
-      };
-    });
-  };
-
   placeSelectedHandler = (key) => {
-    this.setState(prevState => {
-      return {
-        selectedPlace: prevState.places.find(place => {
-          return place.key === key;
-        })
-      };
-    });
+    this.props.onSelectPlace(key);
   };
 
   render() {
-    
     return (
       <View style={styles.container}>
         <PlaceDetail 
-          selectedPlace={this.state.selectedPlace} 
+          selectedPlace={this.props.selectedPlace} 
           onItemDeleted={this.placeDeletedHandler} 
           onModalClosed={this.modalClosedHandler} 
         />
         <PlaceInput onPlaceAdded={this.placeAddedHandler} /> 
         <PlaceList 
-          places={this.state.places}
+          places={this.props.places}
           onItemSelected={this.placeSelectedHandler}/>       
       </View>
     );
