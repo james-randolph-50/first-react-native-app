@@ -11,8 +11,7 @@ class App extends Component {
   placeAddedHandler = (placeName) => {
     this.props.onAddPlace(placeName);
   };
-  // testing commit from new user account (comp)
-
+// testing git config email address change
   placeDeletedHandler = () => {
     this.props.onDeletePlace();
   };
